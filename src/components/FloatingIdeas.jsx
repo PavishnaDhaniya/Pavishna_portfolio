@@ -5,62 +5,62 @@ const FloatingIdeas = () => {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    const container = containerRef.current;
-    const ideaCount = 15;
-    const ideas = [];
+    const ctx = gsap.context(() => {
+      const container = containerRef.current;
+      const ideaCount = 15;
+      const ideas = [];
 
-    for (let i = 0; i < ideaCount; i++) {
-      const idea = document.createElement('div');
-      idea.className = 'idea-bubble';
-      
-      // Random properties
-      const size = Math.random() * 60 + 20;
-      const opacity = Math.random() * 0.5 + 0.1;
-      const x = Math.random() * 100;
-      const y = Math.random() * 100;
-      
-      idea.style.width = `${size}px`;
-      idea.style.height = `${size}px`;
-      idea.style.left = `${x}%`;
-      idea.style.top = `${y}%`;
-      idea.style.opacity = opacity;
-      
-      // Color variety
-      const colors = ['var(--accent-primary)', 'var(--accent-secondary)', 'var(--accent-tertiary)'];
-      idea.style.background = `radial-gradient(circle at 30% 30%, white, ${colors[Math.floor(Math.random() * colors.length)]})`;
-      idea.style.boxShadow = `0 0 20px ${colors[Math.floor(Math.random() * colors.length)]}33`;
+      for (let i = 0; i < ideaCount; i++) {
+        const idea = document.createElement('div');
+        idea.className = 'idea-bubble';
 
-      container.appendChild(idea);
-      ideas.push(idea);
+        // Random properties
+        const size = Math.random() * 60 + 20;
+        const opacity = Math.random() * 0.5 + 0.1;
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
 
-      // Animate
-      gsap.to(idea, {
-        x: '+=random(-100, 100)',
-        y: '+=random(-100, 100)',
-        duration: 'random(10, 20)',
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-        delay: Math.random() * 5
-      });
-      
-      gsap.to(idea, {
-        scale: 'random(0.8, 1.2)',
-        duration: 'random(3, 6)',
-        repeat: -1,
-        yoyo: true,
-        ease: 'power1.inOut'
-      });
-    }
+        idea.style.width = `${size}px`;
+        idea.style.height = `${size}px`;
+        idea.style.left = `${x}%`;
+        idea.style.top = `${y}%`;
+        idea.style.opacity = opacity;
 
-    return () => {
-      ideas.forEach(idea => idea.remove());
-    };
+        // Color variety
+        const colors = ['var(--accent-primary)', 'var(--accent-secondary)', 'var(--accent-tertiary)'];
+        idea.style.background = `radial-gradient(circle at 30% 30%, white, ${colors[Math.floor(Math.random() * colors.length)]})`;
+        idea.style.boxShadow = `0 0 20px ${colors[Math.floor(Math.random() * colors.length)]}33`;
+
+        container.appendChild(idea);
+        ideas.push(idea);
+
+        // Animate
+        gsap.to(idea, {
+          x: () => gsap.utils.random(-100, 100),
+          y: () => gsap.utils.random(-100, 100),
+          duration: () => gsap.utils.random(10, 20),
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+          delay: Math.random() * 5
+        });
+
+        gsap.to(idea, {
+          scale: () => gsap.utils.random(0.8, 1.2),
+          duration: () => gsap.utils.random(3, 6),
+          repeat: -1,
+          yoyo: true,
+          ease: 'power1.inOut'
+        });
+      }
+    }, containerRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <div 
-      ref={containerRef} 
+    <div
+      ref={containerRef}
       className="floating-ideas-container"
       style={{
         position: 'fixed',
