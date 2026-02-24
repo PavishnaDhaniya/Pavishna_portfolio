@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import FloatingIdeas from './components/FloatingIdeas';
 import Chatbox from './components/Chatbox';
 import { motion } from 'framer-motion';
@@ -10,6 +10,9 @@ import { portfolioData } from './data/portfolioData';
 gsap.registerPlugin(ScrollTrigger);
 
 const App = () => {
+  const bgVideoRef = useRef(null);
+  const aboutVideoRef = useRef(null);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -51,11 +54,27 @@ const App = () => {
       yoyo: true,
       ease: 'sine.inOut'
     });
+
+    // Force video autoplay (some browsers block autoPlay attribute)
+    const playVideos = () => {
+      if (bgVideoRef.current) bgVideoRef.current.play().catch(err => console.log("BG Video autoplay blocked:", err));
+      if (aboutVideoRef.current) aboutVideoRef.current.play().catch(err => console.log("About Video autoplay blocked:", err));
+    };
+
+    playVideos();
+    // Also try on first click/move just in case
+    window.addEventListener('click', playVideos, { once: true });
+    window.addEventListener('touchstart', playVideos, { once: true });
+
+    return () => {
+      window.removeEventListener('click', playVideos);
+      window.removeEventListener('touchstart', playVideos);
+    };
   }, []);
 
   return (
     <div className="app-container">
-      <video className="video-bg" autoPlay loop muted playsInline>
+      <video ref={bgVideoRef} className="video-bg" autoPlay loop muted playsInline>
         <source src="/carchase.mp4" type="video/mp4" />
       </video>
       <div className="overlay"></div>
@@ -135,6 +154,7 @@ const App = () => {
               }}
             >
               <video
+                ref={aboutVideoRef}
                 autoPlay
                 loop
                 muted
