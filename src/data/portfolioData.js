@@ -80,7 +80,7 @@ export const portfolioData = {
     },
     social: {
         linkedin: "https://www.linkedin.com/in/pavishna-dhaniya",
-        github: "#", // Add GitHub if available
+        github: "https://github.com/PavishnaDhaniya", // Add GitHub if available
         email: "mailto:pavishnarajkumar@gmail.com"
     }
 };
