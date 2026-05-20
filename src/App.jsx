@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import FloatingIdeas from './components/FloatingIdeas';
 import Chatbox from './components/Chatbox';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, ExternalLink, Code, Cpu, User, MessageSquare } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, Code, Cpu, User } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { portfolioData } from './data/portfolioData';
@@ -114,6 +114,15 @@ const App = () => {
           >
             {portfolioData.hero.ctaText}
           </button>
+          <a
+            href={portfolioData.hero.resumeLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="glass"
+            style={{ padding: '12px 30px', color: 'white', border: '1px solid var(--accent-secondary)', cursor: 'pointer', fontWeight: '600', textDecoration: 'none' }}
+          >
+            View Resume
+          </a>
           <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
             <a href={portfolioData.social.github} target="_blank" rel="noopener noreferrer"><Github className="social-icon" /></a>
             <a href={portfolioData.social.linkedin} target="_blank" rel="noopener noreferrer"><Linkedin className="social-icon" /></a>
@@ -131,6 +140,11 @@ const App = () => {
               <p style={{ fontSize: '1.1rem', lineHeight: '1.8', color: 'var(--text-secondary)', whiteSpace: 'pre-line' }}>
                 {portfolioData.about.description}
               </p>
+              <ul style={{ marginTop: '25px', display: 'grid', gap: '12px', color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: '1.7', paddingLeft: '18px' }}>
+                {portfolioData.about.highlights.map((item, idx) => (
+                  <li key={idx} style={{ listStyle: 'disc' }}>{item}</li>
+                ))}
+              </ul>
             </div>
             <motion.div
               animate={{
@@ -177,29 +191,41 @@ const App = () => {
       <section id="projects" className="projects" style={{ padding: '100px 20px', position: 'relative', zIndex: 1 }}>
         <h2 className="reveal glow-text" style={{ textAlign: 'center', fontSize: '3rem', marginBottom: '60px' }}>{portfolioData.activitiesTitle || 'Activities'}</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px', maxWidth: '1200px', margin: '0 auto' }}>
-          {portfolioData.ventures.map((proj, i) => (
-            <div key={i} className="glass reveal" style={{ padding: '40px', transition: 'transform 0.3s' }}>
-              <div style={{ color: 'var(--accent-secondary)', marginBottom: '20px' }}><Code size={30} /></div>
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '10px' }}>{proj.title}</h3>
-              <p style={{ color: 'var(--text-secondary)', marginBottom: '20px', fontSize: '0.9rem' }}>{proj.tech}</p>
-              <p style={{ lineHeight: '1.6', marginBottom: '25px' }}>{proj.desc}</p>
-              <a href={proj.document} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-primary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px', fontWeight: '600' }}>
-                View Document <ExternalLink size={16} />
-              </a>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section className="skills reveal" style={{ padding: '100px 20px', textAlign: 'center', position: 'relative', zIndex: 1 }}>
-        <h2 className="glow-text" style={{ fontSize: '2.5rem', marginBottom: '50px' }}>{portfolioData.skills.title}</h2>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', maxWidth: '800px', margin: '0 auto' }}>
-          {portfolioData.skills.items.map((skill, i) => (
-            <div key={i} className="glass" style={{ padding: '10px 25px', borderRadius: '50px', fontSize: '1rem', fontWeight: '500' }}>
-              {skill}
-            </div>
-          ))}
+          {portfolioData.ventures.map((proj, i) => {
+            const documents = proj.documents || (proj.document ? [proj.document] : []);
+            return (
+              <div key={i} className="glass reveal" style={{ padding: '40px', transition: 'transform 0.3s' }}>
+                <div style={{ color: 'var(--accent-secondary)', marginBottom: '20px' }}><Code size={30} /></div>
+                <h3 style={{ fontSize: '1.5rem', marginBottom: '10px' }}>{proj.title}</h3>
+                <p style={{ color: 'var(--text-secondary)', marginBottom: '20px', fontSize: '0.9rem' }}>{proj.tech}</p>
+                <p style={{ lineHeight: '1.6', marginBottom: '25px' }}>{proj.desc}</p>
+                {proj.link ? (
+                  <a
+                    href={proj.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: 'var(--accent-primary)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', fontWeight: '600' }}
+                  >
+                    Visit Project <ExternalLink size={16} />
+                  </a>
+                ) : documents.length > 0 ? (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                    {documents.map((doc, docIndex) => (
+                      <a
+                        key={docIndex}
+                        href={doc}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: 'var(--accent-primary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px', fontWeight: '600' }}
+                      >
+                        {doc.replace(/^.*[\\/]/, '')} <ExternalLink size={16} />
+                      </a>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            );
+          })}
         </div>
       </section>
 

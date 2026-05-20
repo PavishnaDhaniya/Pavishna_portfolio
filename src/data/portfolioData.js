@@ -1,45 +1,22 @@
-import { Cpu, MessageSquare, Code } from 'lucide-react';
+import { Cpu, Code } from 'lucide-react';
 
 export const portfolioData = {
     hero: {
         title: "Pavishna Dhaniya",
-        subtitle: "A digital canvas where imagination meets execution. Explore the boundary-less playground of innovation as I Design with Purpose   Create with care  and explore sustainability through innovation.",
-        ctaText: "View Projects"
+        subtitle: "A digital canvas where imagination meets execution. Explore the boundary-less playground of innovation as I design with purpose, create with care, and pioneer sustainable textile solutions.",
+        ctaText: "View Projects",
+        resumeLink: "/Pavishna_Dhaniya_Resume.pdf"
     },
     about: {
         title: "Textile Technologist",
-        description: `Driven by a passion for sustainable fashion and textile innovation, I’m a Textile Technologist in the making—curious about materials, processes, and design that respect both people and the planet. I believe the future of fashion lies in conscious choices and smart technology.`
+        description: `Driven by a passion for sustainable fashion and textile innovation, I’m a Textile Technologist in the making—curious about materials, processes, and design that respect both people and the planet. I believe the future of fashion lies in conscious choices and smart technology.`,
+        highlights: [
+            "Developing eco-conscious textile systems for wearables and interiors.",
+            "Blending material science with digital design to create meaningful product experiences.",
+            "Collaborating across design, engineering, and production to simplify complexity."
+        ]
     },
-    activitiesTitle: "Activities",
-    projects: [
-        {
-            title: "Nebula OS",
-            desc: "A decentralized operating system for edge nodes.",
-            icon: Cpu,
-            tech: "Rust / Wasm" // Added tech for consistency if needed, though App.jsx usage might vary
-        },
-        {
-            title: "Quantum Chat",
-            desc: "Encryption that evolves with the speed of thought.",
-            icon: MessageSquare,
-            tech: "Go / OQS"
-        },
-        {
-            title: "Ether Flow",
-            desc: "Visualizing data streams in 4D space.",
-            icon: Code,
-            tech: "WebGL / Three.js"
-        },
-        // Ventures section projects used different data in original App.jsx, consolidating here or keeping separate if intended.
-        // In original App.jsx there were two lists. One in `projects` const (lines 40-44) and one inline in `Ventures` section (lines 106-110).
-        // I will consolidate them or provide both if they serve different purposes. 
-        // The "Ventures" section seemed to be the main visual grid. The `projects` const was used for FloatingIdeas? No, `projects` const was unused in the provided App.jsx snippet!
-        // Wait, let me check App.jsx usage of `projects` const.
-        // Line 40: const projects = [...]
-        // Line 48: <FloatingIdeas /> -> It might use it if passed as prop? But it is not passed.
-        // Line 106: Inline array map for Ventures.
-        // I will use the Ventures data for the main projects section.
-    ],
+    activitiesTitle: "Featured Work",
     ventures: [
         {
             title: "Tinkercad",
@@ -64,12 +41,49 @@ export const portfolioData = {
             tech: "Mobile App Development",
             desc: "Building functional Android applications with block-based coding.",
             document: "/mit.pdf"
+        },
+        {
+            title: "Computational Hardware",
+            tech: "Embedded Systems / FPGA",
+            desc: "Designing and simulating hardware circuits for efficient computation and real-time control.",
+            documents: [
+                "/docs/computational-hardware/Arduino_Sensor_20260407_142607_0000.pdf",
+                "/docs/computational-hardware/IR_Relay_Report.docx_20260407_123400_0000.pdf",
+                "/docs/computational-hardware/Sensors_Actuators_Alpha8_v2.docx"
+            ]
+        },
+        {
+            title: "Django App Development",
+            tech: "Web Backend / Python",
+            desc: "Building scalable Django applications with database integration, REST APIs, and user-focused interfaces.",
+            documents: [
+                "/docs/django-app-development/development.docx",
+                "/docs/django-app-development/app.zip"
+            ]
+        },
+        {
+            title: "IoT Assignment",
+            tech: "Connected Devices / Sensors",
+            desc: "Developing internet-of-things prototypes with sensor networks, data collection, and cloud connectivity.",
+            documents: [
+                "/docs/iot-assignment/23BTT030-IOT.docx"
+            ]
+        },
+        {
+            title: "Android Application Development",
+            tech: "Mobile UX / Java/Kotlin",
+            desc: "Creating polished Android apps that combine intuitive design with native mobile performance.",
+            documents: [
+                "/docs/android-app-development/Android_Application_Development.docx"
+            ]
+        },
+        {
+            title: "My Project",
+            tech: "Portfolio / Creative Development",
+            desc: "A signature project that brings together my design thinking, technical skills, and storytelling in a polished portfolio showcase.",
+            link: "https://teamalpha8.github.io/"
         }
     ],
-    skills: {
-        title: "Arsenal",
-        items: ['React', 'Three.js', 'Node.js', 'Typescript', 'GLSL', 'Python', 'Docker', 'AWS', 'UI/UX Design']
-    },
     contact: {
         title: "Let's Create",
         subtitle: "Ready to bring your vision to life? Let's discuss how we can build something extraordinary together.",
@@ -80,7 +94,7 @@ export const portfolioData = {
     },
     social: {
         linkedin: "https://www.linkedin.com/in/pavishna-dhaniya",
-        github: "https://github.com/PavishnaDhaniya", // Add GitHub if available
+        github: "https://github.com/PavishnaDhaniya",
         email: "mailto:pavishnarajkumar@gmail.com"
     }
 };
