@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Calculator Application</string>
+    <string name="ac">AC</string>
+    <string name="percentage">%</string>
+    <string name="delete">DEL</string>
+    <string name="divide">÷</string>
+    <string name="n7">7</string>
+    <string name="n8">8</string>
+    <string name="n9">9</string>
+    <string name="multiply">×</string>
+    <string name="n4">4</string>
+    <string name="n5">5</string>
+    <string name="n6">6</string>
+    <string name="minus">−</string>
+    <string name="n1">1</string>
+    <string name="n2">2</string>
+    <string name="n3">3</string>
+    <string name="plus">+</string>
+    <string name="n00">00</string>
+    <string name="n0">0</string>
+    <string name="dot">.</string>
+    <string name="equal">=</string>
+
+    <!-- Accessibility Strings -->
+    <string name="desc_ac">All Clear</string>
+    <string name="desc_percentage">Percentage</string>
+    <string name="desc_delete">Delete</string>
+    <string name="desc_divide">Divide</string>
+    <string name="desc_multiply">Multiply</string>
+    <string name="desc_minus">Minus</string>
+    <string name="desc_plus">Plus</string>
+    <string name="desc_equal">Equals</string>
+    <string name="desc_dot">Dot</string>
+    <string name="desc_00">Double Zero</string>
+    <string name="result_display">Result display</string>
+</resources>

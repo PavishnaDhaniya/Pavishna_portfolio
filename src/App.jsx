@@ -192,38 +192,39 @@ const App = () => {
         <h2 className="reveal glow-text" style={{ textAlign: 'center', fontSize: '3rem', marginBottom: '60px' }}>{portfolioData.activitiesTitle || 'Activities'}</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px', maxWidth: '1200px', margin: '0 auto' }}>
           {portfolioData.ventures.map((proj, i) => {
-            const documents = proj.documents || (proj.document ? [proj.document] : []);
+            const hasDocuments = Array.isArray(proj.documents) && proj.documents.length > 0;
+            const href = proj.link || proj.detailsPage || proj.document;
+            const buttonText = proj.link
+              ? 'Visit Project'
+              : hasDocuments
+                ? `View ${proj.documents.length} document${proj.documents.length > 1 ? 's' : ''}`
+                : proj.document
+                  ? 'Open Document'
+                  : 'View Details';
+
             return (
-              <div key={i} className="glass reveal" style={{ padding: '40px', transition: 'transform 0.3s' }}>
-                <div style={{ color: 'var(--accent-secondary)', marginBottom: '20px' }}><Code size={30} /></div>
-                <h3 style={{ fontSize: '1.5rem', marginBottom: '10px' }}>{proj.title}</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '20px', fontSize: '0.9rem' }}>{proj.tech}</p>
-                <p style={{ lineHeight: '1.6', marginBottom: '25px' }}>{proj.desc}</p>
-                {proj.link ? (
-                  <a
-                    href={proj.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: 'var(--accent-primary)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', fontWeight: '600' }}
-                  >
-                    Visit Project <ExternalLink size={16} />
-                  </a>
-                ) : documents.length > 0 ? (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    {documents.map((doc, docIndex) => (
-                      <a
-                        key={docIndex}
-                        href={doc}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ color: 'var(--accent-primary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px', fontWeight: '600' }}
-                      >
-                        {doc.replace(/^.*[\\/]/, '')} <ExternalLink size={16} />
-                      </a>
-                    ))}
+              <a
+                key={i}
+                href={href}
+                target={proj.link || !!href ? '_blank' : undefined}
+                rel={proj.link || !!href ? 'noopener noreferrer' : undefined}
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                <div className="glass reveal" style={{ padding: '40px', transition: 'transform 0.3s', minHeight: '280px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                  <div>
+                    <div style={{ color: 'var(--accent-secondary)', marginBottom: '20px' }}><Code size={30} /></div>
+                    <h3 style={{ fontSize: '1.5rem', marginBottom: '10px' }}>{proj.title}</h3>
+                    <p style={{ color: 'var(--text-secondary)', marginBottom: '20px', fontSize: '0.9rem' }}>{proj.tech}</p>
+                    <p style={{ lineHeight: '1.6', marginBottom: '25px' }}>{proj.desc}</p>
+                    {hasDocuments && (
+                      <p style={{ marginTop: '15px', color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
+                        {proj.documents.length} document{proj.documents.length > 1 ? 's' : ''} available
+                      </p>
+                    )}
                   </div>
-                ) : null}
-              </div>
+                  <div style={{ height: '1px' }} aria-hidden="true"></div>
+                </div>
+              </a>
             );
           })}
         </div>

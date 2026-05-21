@@ -5,7 +5,7 @@ export const portfolioData = {
         title: "Pavishna Dhaniya",
         subtitle: "A digital canvas where imagination meets execution. Explore the boundary-less playground of innovation as I design with purpose, create with care, and pioneer sustainable textile solutions.",
         ctaText: "View Projects",
-        resumeLink: "/Pavishna_Dhaniya_Resume.pdf"
+        resumeLink: "/resume.pdf"
     },
     about: {
         title: "Textile Technologist",
@@ -22,7 +22,7 @@ export const portfolioData = {
             title: "Tinkercad",
             tech: "3D Design / Electronics",
             desc: "Innovative 3D modeling and circuit design projects.",
-            document: "/Assignment_1_Pavishna_Dhaniya_R.pdf"
+            document: "/tinkercad.pdf"
         },
         {
             title: "Scratch",
@@ -34,7 +34,7 @@ export const portfolioData = {
             title: "Fusion 360",
             tech: "CAD / CAM / CAE",
             desc: "Advanced product design and engineering simulations.",
-            document: "/AutoCAD_360_Water_Bottle_Project.pdf"
+            detailsPage: "/docs-viewer.html?project=fusion-360"
         },
         {
             title: "MIT App Inventor",
@@ -47,35 +47,40 @@ export const portfolioData = {
             tech: "Embedded Systems / FPGA",
             desc: "Designing and simulating hardware circuits for efficient computation and real-time control.",
             documents: [
-                "/docs/computational-hardware/Arduino_Sensor_20260407_142607_0000.pdf",
-                "/docs/computational-hardware/IR_Relay_Report.docx_20260407_123400_0000.pdf",
-                "/docs/computational-hardware/Sensors_Actuators_Alpha8_v2.docx"
-            ]
+                "/computational-hardware-1.pdf",
+                "/computational-hardware-2.pdf",
+                "/computational-hardware-3.docx"
+            ],
+            detailsPage: "/docs-viewer.html?project=computational-hardware"
         },
         {
             title: "Django App Development",
             tech: "Web Backend / Python",
             desc: "Building scalable Django applications with database integration, REST APIs, and user-focused interfaces.",
             documents: [
-                "/docs/django-app-development/development.docx",
-                "/docs/django-app-development/app.zip"
-            ]
+                "/django-app-development.docx",
+                "/django-app-development.zip"
+            ],
+            detailsPage: "/docs-viewer.html?project=django-app-development"
         },
         {
             title: "IoT Assignment",
             tech: "Connected Devices / Sensors",
             desc: "Developing internet-of-things prototypes with sensor networks, data collection, and cloud connectivity.",
             documents: [
-                "/docs/iot-assignment/23BTT030-IOT.docx"
-            ]
+                "/iot-assignment.docx"
+            ],
+            detailsPage: "/docs-viewer.html?project=iot-assignment"
         },
         {
             title: "Android Application Development",
             tech: "Mobile UX / Java/Kotlin",
             desc: "Creating polished Android apps that combine intuitive design with native mobile performance.",
             documents: [
-                "/docs/android-app-development/Android_Application_Development.docx"
-            ]
+                "/android-application-development.docx",
+                "/android-app-development.zip"
+            ],
+            detailsPage: "/docs-viewer.html?project=android-application-development"
         },
         {
             title: "My Project",

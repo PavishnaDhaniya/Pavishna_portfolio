@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Featured Work Documents</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      color: #fff;
+      background: #060606;
+      font-family: Inter, system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 0; }
+    .page { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+    .card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 30px; }
+    h1, h2, p { margin: 0; }
+    h1 { font-size: clamp(2.6rem, 5vw, 4rem); margin-bottom: 10px; }
+    h2 { font-size: 1.3rem; margin-top: 0; color: #d0d0ff; }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 30px; color: #8cc7ff; text-decoration: none; font-weight: 600; }
+    .docs-list { margin-top: 30px; display: grid; gap: 16px; }
+    .doc-item { padding: 20px; border-radius: 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; }
+    .doc-item a { color: #a8d3ff; text-decoration: none; font-weight: 600; }
+    .doc-item a:hover { color: #fff; }
+    .empty { margin-top: 30px; color: #bbb; }
+    .note { margin-top: 20px; color: #aaa; line-height: 1.7; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="/">← Back to Portfolio</a>
+    <div class="card">
+      <h1 id="project-title">Featured Work</h1>
+      <h2 id="project-subtitle">Open the documents for the selected portfolio item.</h2>
+      <div id="docs" class="docs-list"></div>
+      <p id="empty-message" class="empty" style="display:none;">No documents are available for this item yet.</p>
+      <p class="note">If a document does not open, please verify you have the latest portfolio version or contact the site owner for document updates.</p>
+    </div>
+  </div>
+  <script>
+    const projects = {
+      "tinkercad": {
+        title: "Tinkercad",
+        subtitle: "3D Design / Electronics",
+        docs: [
+          { name: "Tinkercad Project PDF", file: "/tinkercad.pdf" }
+        ]
+      },
+      "scratch": {
+        title: "Scratch",
+        subtitle: "Interactive Stories / Games",
+        docs: [
+          { name: "Scratch Programming Report", file: "/scratch.pdf" }
+        ]
+      },
+      "fusion-360": {
+        title: "Fusion 360",
+        subtitle: "CAD / CAM / CAE",
+        docs: []
+      },
+      "mit-app-inventor": {
+        title: "MIT App Inventor",
+        subtitle: "Mobile App Development",
+        docs: [
+          { name: "MIT App Inventor App Demo", file: "/mit.pdf" }
+        ]
+      },
+      "computational-hardware": {
+        title: "Computational Hardware",
+        subtitle: "Embedded Systems / FPGA",
+        docs: [
+          { name: "Computational Hardware Report 1", file: "/computational-hardware-1.pdf" },
+          { name: "Computational Hardware Report 2", file: "/computational-hardware-2.pdf" },
+          { name: "Computational Hardware Notes", file: "/computational-hardware-3.docx" }
+        ]
+      },
+      "django-app-development": {
+        title: "Django App Development",
+        subtitle: "Web Backend / Python",
+        docs: [
+          { name: "Django Development Notes", file: "/django-app-development.docx" },
+          { name: "Django App ZIP", file: "/django-app-development.zip" }
+        ]
+      },
+      "iot-assignment": {
+        title: "IoT Assignment",
+        subtitle: "Connected Devices / Sensors",
+        docs: [
+          { name: "IoT Assignment Document", file: "/iot-assignment.docx" }
+        ]
+      },
+      "android-application-development": {
+        title: "Android Application Development",
+        subtitle: "Mobile UX / Java/Kotlin",
+        docs: [
+          { name: "Android App Development Notes", file: "/android-application-development.docx" },
+          { name: "Android App Development ZIP", file: "/android-app-development.zip" }
+        ]
+      }
+    };
+
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    function renderProject(key) {
+      const project = projects[key];
+      const titleEl = document.getElementById('project-title');
+      const subtitleEl = document.getElementById('project-subtitle');
+      const docsEl = document.getElementById('docs');
+      const emptyMessage = document.getElementById('empty-message');
+
+      if (!project) {
+        titleEl.textContent = 'Document Viewer';
+        subtitleEl.textContent = 'Select a valid featured work item from the portfolio.';
+        emptyMessage.textContent = 'The requested document category could not be found.';
+        emptyMessage.style.display = 'block';
+        return;
+      }
+
+      titleEl.textContent = project.title;
+      subtitleEl.textContent = project.subtitle;
+
+      docsEl.innerHTML = '';
+      if (!project.docs || project.docs.length === 0) {
+        emptyMessage.style.display = 'block';
+        return;
+      }
+
+      project.docs.forEach(doc => {
+        const item = document.createElement('div');
+        item.className = 'doc-item';
+        const label = document.createElement('span');
+        label.textContent = doc.name;
+        const link = document.createElement('a');
+        link.href = doc.file;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = 'Open Document';
+        item.appendChild(label);
+        item.appendChild(link);
+        docsEl.appendChild(item);
+      });
+    }
+
+    const projectKey = getQueryParam('project');
+    renderProject(projectKey);
+  </script>
+</body>
+</html>
